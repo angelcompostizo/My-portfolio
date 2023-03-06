@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: webserver-deploy-netpol
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+     run: pod-a
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: webserver
+      ports:
+        - protocol: TCP
+          port: 80

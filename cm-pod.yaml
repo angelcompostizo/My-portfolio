@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: my-db
+  name: my-db
+spec:
+  containers:
+  - image: nginx
+    name: my-db
+    env:
+      - name: DB_USERNAME
+        valueFrom:
+          configMapKeyRef:
+            name: my-config
+            key: user
+      - name: DB_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: my-config
+            key: host
+    volumeMounts:
+    - name: hosts
+      mountPath: /mnt/etc/
+      readOnly: True
+  volumes:
+  - name: hosts
+    configMap:
+      name: hosts
