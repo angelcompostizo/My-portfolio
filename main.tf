@@ -38,5 +38,5 @@ provider "aws" {
 module "staticwebsite" {
   source = "./../staticwebsite"
   bucketname = "acowebsitebucket"
-  
+
 }
