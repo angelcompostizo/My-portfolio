@@ -1,12 +1,12 @@
 #!/bin/bash
-# grabsysinfo.sh - A simple menu driven shell script to to get information about your 
+# menu driven shell script to to get information about your 
 # Linux server / desktop.
 
 
-# Define variables
+# Define the variables
 LSB=/usr/bin/lsb_release
 
-# Purpose: Display pause prompt
+#Display pause prompt
 # $1-> Message (optional)
 function pause(){
 	local message="$@"
@@ -14,7 +14,7 @@ function pause(){
 	read -p "$message" readEnterKey
 }
 
-# Purpose  - Display a menu on screen
+# Display a menu on screen
 function show_menu(){
     date
     echo "---------------------------"
@@ -29,7 +29,7 @@ function show_menu(){
 	echo "7. exit"
 }
 
-# Purpose - Display header message
+#Display header message
 # $1 - message
 function write_header(){
 	local h="$@"
@@ -38,7 +38,7 @@ function write_header(){
 	echo "---------------------------------------------------------------"
 }
 
-# Purpose - Get info about your operating system
+# info about your operating system
 function os_info(){
 	write_header " System information "
 	echo "Operating system : $(uname)"
@@ -47,7 +47,7 @@ function os_info(){
 	pause
 }
 
-# Purpose - Get info about host such as dns, IP, and hostname
+# Get info about host such as dns, IP, and hostname
 function host_info(){
 	local dnsips=$(sed -e '/^$/d' /etc/resolv.conf | awk '{if (tolower($1)=="nameserver") print $2}')
 	write_header " Hostname and DNS information "
@@ -81,7 +81,7 @@ function net_info(){
 	pause 
 }
 
-# Purpose - Display a list of users currently logged on 
+#Display a list of users currently logged on 
 #           display a list of receltly loggged in users   
 function user_info(){
 	local cmd="$1"
@@ -91,7 +91,7 @@ function user_info(){
 	esac 
 }
 
-# Purpose - Display used and free memory info
+#Display used and free memory info
 function mem_info(){
 	write_header " Free and used memory "
 	free -m
@@ -106,7 +106,7 @@ function mem_info(){
 	ps auxf | sort -nr -k 4 | head -5	
 	pause
 }
-# Purpose - Get input via the keyboard and make a decision using case..esac 
+#Get input via the keyboard and make a decision using case..esac 
 function read_input(){
 	local c
 	read -p "Enter your choice [ 1 - 7 ] " c
@@ -127,7 +127,7 @@ function read_input(){
 # ignore CTRL+C, CTRL+Z and quit singles using the trap
 trap '' SIGINT SIGQUIT SIGTSTP
 
-# main logic
+# while conditional to menu main
 while true
 do
 	clear
