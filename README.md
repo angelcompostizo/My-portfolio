@@ -7,7 +7,7 @@
 
 - 🌱 I’m currently learning **CD/CI,Gitlab,Ansible**
 
-- 👨‍💻 All of my projects are available at [compostizo.org](compostizo.org)
+- 👨‍💻 All of my projects are available at linkedin: https://www.linkedin.com/in/angel-compostizo-olarte/
 
 - 💬 Ask me about **powershell,Azure Cloud,Amazon Web Services.**
 
