@@ -1,0 +1,93 @@
+Terraform comandos en caso de que necesites recordarlos!
+
+terraform apply [options] [dir-or-plan]  => aplica cambios en terraform
+
+Los indicadores de línea de comandos son todos opcionales. La lista de parámetros disponibles es:
+
+-backup=path - Ruta de acceso al archivo de copia de -backup=path . El valor predeterminado es -state-out con la extensión ”.backup”.
+-lock=true - Bloquea el archivo de estado cuando se admite el bloqueo.
+-lock-timeout=0s - Duración de volver a intentar un bloqueo de estado.
+-input=true - Solicita entrada para variables si no se establece directamente.
+-no-color - Desactiva la salida con color.
+-parallelism=n - Limita el número de operaciones concurrentes cuando Terraform recorre el gráfico .
+-refresh=true - Actualiza el estado de cada recurso antes de planificar y aplicar. Esto no tiene efecto si un archivo del plan se da directamente para aplicar.
+-state=path - Ruta al archivo de estado. El valor predeterminado es “terraform.tfstate”. Se ignora cuando se utiliza el estado remoto .
+-state-out=path - Ruta para escribir el archivo de estado actualizado. Por defecto
+-state usará la ruta. Se ignora cuando se utiliza el estado remoto .
+-target=resource - Una dirección de recursos para el destino. La operación se limitará a este recurso y a sus dependencias. Este indicador se puede utilizar varias veces.
+-var ‘foo=bar’ - Establece una variable en la configuración de Terraform. Este indicador se puede establecer varias veces. Los valores de las variables se interpretan como Lenguaje de Configuración HashiCorp (HCL) , por lo que los valores de lista y mapa se pueden especificar mediante este indicador.
+-var-file=foo - Establece variables en la configuración de Terraform desde un archivo de variable . Si “terraform.tfvars” está presente, se cargará automáticamente primero. Cualquier archivo especificado por -var-file reemplaza cualquier valor en un “terraform.tfvars”. Este indicador se puede utilizar varias veces.
+
+
+terraform console [options] [dir] => crea consola interactiva
+
+-state=path - Ruta al archivo de estado. De forma terraform.tfstate a terraform.tfstate . No es necesario que exista un archivo de estado. Puede cerrar la consola con el comando exit o mediante Control-C o Control-D.
+
+
+terraform destroy [options] [dir] => destruye la infraestructura acepta mismos comandos que el apply
+
+Si se establece -force , entonces la confirmación de destruir no se mostrará.
+El indicador -target , en lugar de afectar a las “dependencias”, también destruirá los recursos que dependan de los objetivos especificados.
+El comportamiento de cualquier comando de destrucción de terraform se puede previsualizar en cualquier momento con un comando equivalente terraform plan -destroy.
+
+terraform env [nombre] => administrar entornos
+
+-list: El comando mostrará todos los entornos creados.
+      -select: El comando terraform env select se utiliza para seleccionar un entorno diferente ya creado.
+      -new: El comando terraform env new se utiliza para crear un nuevo entorno de estado.
+      -delete: El comando terraform env delete se utiliza para eliminar un entorno existente.
+
+
+
+
+terraform fmt [options] [dir] => dar formato terraform 
+
+terraform force-unlock [dir] => elimina el bloqueo de la configuracion actualizado
+
+-force – Fuerza la eliminación del bloqueo del estado para la configuración actual.
+
+terraform get [options] [dir] => descargar y actualizar modulos opciones -update
+
+terraform graph [options] [dir] => muestra una representacion grafica del plan de ejecución
+El gráfico se emite en formato DOT. El programa típico que puede leer este formato es GraphViz, pero muchos servicios web también están disponibles para leer este formato.
+Opciones:
+      -draw-cycles - Destaque cualquier ciclo en el gráfico con bordes coloreados. Esto ayuda al diagnosticar errores de ciclo.
+      -no-color - Si se especifica, la salida no contendrá ningún color.
+      -type=plan - Tipo de gráico de salida. Puede ser: plan, plan-destroy, apply, legacy.
+
+
+
+terraform init [options] [SOURCE] [PATH] => inicializa la configuracion de terraform
+
+terraform output [options] [name] => extrae el valor de una variable
+
+terraform plan [options] [dir-or-plan] => se usa para crear un plan de ejecución antes de dar apply 
+
+ Opciones:
+      -destroy - Si se establece, genera un plan para destruir todos los recursos conocidos.
+      -detailed-exitcode - Devuelve un código de salida -detailed-exitcode cuando sale el comando. Cuando se proporciona, este argumento cambia los códigos de salida y sus significados para proporcionar información más granular sobre lo que el plan resultante contiene:
+0 = Sin cambios 1 = Error 2 = Cambios presentes
+
+terraform push [options] [path] => carga configuracion terraform y mete push para que sea gestionada por Terraform Enterprise.
+
+terraform refresh [options] [dir] => refresca el fichero de estado terraform state
+
+terraform show [options] [path] => muestra salida human readable
+
+terraform untaint [options]  name => desmarca como corrupto 
+
+terraform taint =>  El comando terraform taint marca manualmente un recurso gestionado por Terraform como corrupto, forzándolo a ser destruido y recreado en la siguiente aplicación.
+
+terraform validate [dir] => valida el codigo tf
+
+terraform untaint [options] name
+
+
+
+
+      
+
+
+ 
+
+
