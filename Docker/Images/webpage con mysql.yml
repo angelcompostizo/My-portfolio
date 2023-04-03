@@ -1,0 +1,42 @@
+version: "3"
+#declaramos servicios
+
+services:
+
+#la base de datos mysql
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: users
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+      #el componente de la web por el puerto 80
+  web:
+    build: .
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+      #variable de la bbdd y usuario y login donde se almacenaran usuarios
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: users
+
+      #phpmyadmin para manejar dem anera visual
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
